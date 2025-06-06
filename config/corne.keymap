@@ -21,13 +21,16 @@
 
     behaviors {
         /*
-         * Smart thumb layer-taps with double-tap-hold functionality
+         * Simplified space layer-tap (no double-tap complexity)
+         * Much more responsive than tap-dance
          */
         spc_nav: space_nav_layer {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&lt NAV SPACE>, <&kp SPACE>;
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <150>;
+            quick-tap-ms = <125>;
+            bindings = <&mo>, <&kp>;
         };
 
         tab_sym: tab_symbol_layer {
@@ -89,6 +92,27 @@
             quick-tap-ms = <125>;
             bindings = <&kp>, <&kp>;
         };
+
+        /*
+         * New alt modifiers for comma and R
+         */
+        alt_comma: alt_comma {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <125>;
+            bindings = <&kp>, <&kp>;
+        };
+
+        alt_r: alt_r {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <125>;
+            bindings = <&kp>, <&kp>;
+        };
     };
 
     /*
@@ -105,10 +129,10 @@
             layers = <BASE>;
         };
 
-        combo_underscore {
+        combo_dash {
             timeout-ms = <50>;
             key-positions = <1 2>;  // , + .
-            bindings = <&kp UNDER>;
+            bindings = <&kp MINUS>;
             layers = <BASE>;
         };
 
@@ -139,13 +163,13 @@
             display-name = "Dvorak";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &kp SQT       &kp COMMA     &kp DOT       &kp P         &kp Y             &kp F         &kp G         &kp C         &kp R         &kp L
+         &kp SQT       &alt_comma LALT COMMA &kp DOT   &kp P         &kp Y             &kp F         &kp G         &kp C         &alt_r RALT R &kp L
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
          &ctrl_a LCTRL A  &kp O      &kp E         &kp U         &kp I             &kp D         &kp H         &kp T         &kp N      &ctrl_s RCTRL S
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
          &gui_slash LGUI FSLH  &kp Q  &kp J        &kp K         &kp X             &kp B         &kp M         &kp W         &kp V      &gui_z RGUI Z
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                     &tab_sym      &spc_nav      &kp LSHFT         &ret_fn       &kp BSPC      &del_alt
+                                     &tab_sym      &spc_nav NAV SPACE &kp LSHFT    &ret_fn       &kp BSPC      &del_alt
     //                               ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
             >;
         };
