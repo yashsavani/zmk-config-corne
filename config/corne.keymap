@@ -14,30 +14,40 @@
 #define SYM  2  
 #define FN   3
 
-// Bluetooth clear macros - MUST come before behaviors that reference them
-ZMK_MACRO(bt_0_clear,
-    wait-ms = <10>;
-    bindings = <&bt BT_SEL 0>, <&bt BT_CLR>;
-)
-
-ZMK_MACRO(bt_1_clear,
-    wait-ms = <10>;
-    bindings = <&bt BT_SEL 1>, <&bt BT_CLR>;
-)
-
-ZMK_MACRO(bt_2_clear,
-    wait-ms = <10>;
-    bindings = <&bt BT_SEL 2>, <&bt BT_CLR>;
-)
-
-ZMK_MACRO(bt_3_clear,
-    wait-ms = <10>;
-    bindings = <&bt BT_SEL 3>, <&bt BT_CLR>;
-)
 
 / {
     chosen {
         zmk,physical-layout = &foostan_corne_5col_layout;
+    };
+
+    macros {
+        bt_0_clear: bt_0_clear {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            bindings = <&bt BT_SEL 0>, <&bt BT_CLR>;
+        };
+        
+        bt_1_clear: bt_1_clear {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            bindings = <&bt BT_SEL 1>, <&bt BT_CLR>;
+        };
+        
+        bt_2_clear: bt_2_clear {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            bindings = <&bt BT_SEL 2>, <&bt BT_CLR>;
+        };
+        
+        bt_3_clear: bt_3_clear {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            bindings = <&bt BT_SEL 3>, <&bt BT_CLR>;
+        };
     };
 
     behaviors {
