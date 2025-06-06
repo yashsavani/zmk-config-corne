@@ -1,7 +1,7 @@
 /*
  * Custom ZMK Configuration for 5-Column Corne  
  * Dvorak layout with thumb-based layer activation
- * Simplified version for maximum compatibility
+ * Clean implementation using built-in behaviors
  */
 
 #include <behaviors.dtsi>
@@ -14,74 +14,20 @@
 #define SYM  2  
 #define FN   3
 
+// Key position definitions for combos (5-column Corne layout)
+#define LT0  0  #define LT1  1  #define LT2  2  #define LT3  3  #define LT4  4
+#define LM0  5  #define LM1  6  #define LM2  7  #define LM3  8  #define LM4  9
+#define LB0 10  #define LB1 11  #define LB2 12  #define LB3 13  #define LB4 14
+#define LH0 15  #define LH1 16  #define LH2 17
+
+#define RT0 18  #define RT1 19  #define RT2 20  #define RT3 21  #define RT4 22
+#define RM0 23  #define RM1 24  #define RM2 25  #define RM3 26  #define RM4 27
+#define RB0 28  #define RB1 29  #define RB2 30  #define RB3 31  #define RB4 32
+#define RH0 33  #define RH1 34  #define RH2 35
+
 / {
     chosen {
         zmk,physical-layout = &foostan_corne_5col_layout;
-    };
-
-    behaviors {
-        /*
-         * Optimized homerow modifiers for specific positions
-         */
-        ctrl_a: control_a {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <200>;
-            quick-tap-ms = <125>;
-            bindings = <&kp>, <&kp>;
-        };
-
-        ctrl_s: control_s {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <200>;
-            quick-tap-ms = <125>;
-            bindings = <&kp>, <&kp>;
-        };
-
-        /*
-         * GUI modifiers on . and c
-         */
-        gui_dot: gui_dot {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <200>;
-            quick-tap-ms = <125>;
-            bindings = <&kp>, <&kp>;
-        };
-
-        gui_c: gui_c {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <200>;
-            quick-tap-ms = <125>;
-            bindings = <&kp>, <&kp>;
-        };
-
-        /*
-         * Alt modifiers for comma and R
-         */
-        alt_comma: alt_comma {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <200>;
-            quick-tap-ms = <125>;
-            bindings = <&kp>, <&kp>;
-        };
-
-        alt_r: alt_r {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <200>;
-            quick-tap-ms = <125>;
-            bindings = <&kp>, <&kp>;
-        };
     };
 
     /*
@@ -93,22 +39,15 @@
         // Base layer combos
         combo_esc {
             timeout-ms = <50>;
-            key-positions = <0 1>;  // ' + ,
+            key-positions = <LT0 LT1>;  // ' + ,
             bindings = <&kp ESC>;
-            layers = <BASE>;
-        };
-
-        combo_dash {
-            timeout-ms = <50>;
-            key-positions = <1 2>;  // , + .
-            bindings = <&kp MINUS>;
             layers = <BASE>;
         };
 
         // Nav layer combos
         combo_grave {
             timeout-ms = <50>;
-            key-positions = <0 1>;  // [ + 7
+            key-positions = <LT0 LT1>;  // [ + 7
             bindings = <&kp GRAVE>;
             layers = <NAV>;
         };
@@ -116,7 +55,7 @@
         // Sym layer combos  
         combo_tilde {
             timeout-ms = <50>;
-            key-positions = <0 1>;  // { + &
+            key-positions = <LT0 LT1>;  // { + &
             bindings = <&kp TILDE>;
             layers = <SYM>;
         };
@@ -127,75 +66,80 @@
 
         /*
          * BASE LAYER: Dvorak with strategic modifier placement
+         * Homerow mods: a/s = ctrl, comma/r = alt, dot/c = gui
+         * Thumb layer-taps for navigation, symbols, and functions
          */
         base_layer {
             display-name = "Dvorak";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &kp SQT       &alt_comma LALT COMMA &gui_dot LGUI DOT &kp P       &kp Y             &kp F         &kp G         &gui_c RGUI C &alt_r RALT R &kp L
+         &kp SQT       &mt LALT COMMA &mt LGUI DOT &kp P          &kp Y             &kp F         &kp G          &mt RGUI C    &mt RALT R     &kp L
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &ctrl_a LCTRL A  &kp O      &kp E         &kp U         &kp I             &kp D         &kp H         &kp T         &kp N      &ctrl_s RCTRL S
+         &mt LCTRL A   &kp O         &kp E         &kp U          &kp I             &kp D         &kp H          &kp T         &kp N          &mt RCTRL S
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &kp FSLH      &kp Q         &kp J         &kp K         &kp X             &kp B         &kp M         &kp W         &kp V         &kp Z
+         &kp FSLH      &kp Q         &kp J         &kp K          &kp X             &kp B         &kp M          &kp W         &kp V          &kp Z
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                     &lt SYM TAB   &lt NAV SPACE &kp LSHFT         &mt LSHFT RET &kp BSPC      &lt FN DEL
-    //                               ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+                                     &lt SYM TAB   &lt NAV SPACE  &mt LSHFT MINUS   &mt RSHFT RET &lt FN BSPC    &mt RGUI DEL
+    //                                ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
             >;
         };
 
         /*
          * NAV LAYER: Numbers, navigation, and brackets  
-         * NOTE: del is pure &kp DEL so space+del works cleanly
+         * Calculator-style number layout with navigation cluster
+         * Transparent del key for clean space+del interaction
          */
         nav_layer {
             display-name = "Nav/Num";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &kp LBKT      &kp N7        &kp N8        &kp N9        &kp RBKT          &kp PG_UP     &kp PSCRN     &kp UP        &none         &kp RIGHT
+         &kp BSLH      &mt LALT N7   &mt LGUI N8   &kp N9         &kp N0            &kp RIGHT     &kp PSCRN      &kp UP         &trans        &kp RIGHT
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &kp SEMI      &kp N4        &kp N5        &kp N6        &kp EQUAL         &kp PG_DN     &kp LEFT      &kp DOWN      &kp RIGHT     &kp N
+         &mt LCTRL SEMI &kp N4       &kp N5        &kp N6         &kp EQUAL         &kp PG_UP     &kp LEFT       &kp DOWN       &kp RIGHT     &trans
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &kp BSLH      &kp N1        &kp N2        &kp N3        &kp N0            &none         &kp HOME      &none         &kp END       &kp CAPS
+         &kp LBKT      &kp N1        &kp N2        &kp N3         &kp RBKT          &kp LEFT      &kp HOME       &mt RGUI PG_DN &kp END       &kp CAPS
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                     &trans        &trans        &trans            &trans        &trans        &kp DEL
-    //                               ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+                                     &trans        &trans         &trans            &trans        &kp BSPC       &trans
+    //                                ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
             >;
         };
 
         /*
-         * SYM LAYER: Symbols (left hand only for efficiency)
+         * SYM LAYER: Symbols (left hand only for mouse use)  
+         * Programming symbols accessible without moving right hand
          */
         sym_layer {
             display-name = "Symbol";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &kp LBRC      &kp AMPS      &kp LPAR      &kp RPAR      &kp RBRC          &none         &none         &none         &none         &none
+         &kp LBRC      &mt LALT AMPS &mt LGUI ASTRK &kp LPAR       &kp RPAR         &trans         &trans        &trans        &trans         &trans
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &kp COLON     &kp DLLR      &kp PRCNT     &kp CARET     &kp PLUS          &none         &none         &none         &none         &none
+         &mt LCTRL COLON &kp DLLR    &kp PRCNT     &kp CARET      &kp PLUS          &trans         &trans        &trans        &trans         &trans
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &kp PIPE      &kp EXCL      &kp AT        &kp HASH      &kp ASTRK         &none         &none         &none         &none         &none
+         &kp LBRC      &kp EXCL      &kp AT        &kp HASH       &kp RBRC          &trans         &trans        &trans        &trans         &trans
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                     &trans        &trans        &trans            &trans        &trans        &trans
-    //                               ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+                                     &trans        &trans         &trans            &trans         &trans        &trans
+    //                                ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
             >;
         };
 
         /*
          * FN LAYER: Function keys, media controls, and system functions
-         * NOTE: space is pure &kp SPACE so you can get repeated spaces
+         * F-key clusters with media controls and Bluetooth management
+         * Transparent space key for repeatable spaces while in layer
          */
         fn_layer {
             display-name = "Function";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &kp F12       &kp F7        &kp F8        &kp F9        &kp LC(LS(LALT))  &kp C_BRI_UP  &kp C_MUTE    &kp C_VOL_UP  &kp C_PP      &kp C_NEXT
+         &kp F12       &mt LALT F7   &mt LGUI F8   &kp F9         &kp LC(LS(LALT))  &kp C_BRI_UP  &kp C_MUTE     &kp C_VOL_UP  &kp C_PP       &kp C_NEXT
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &kp F11       &kp F4        &kp F5        &kp F6        &kp LC(GRAVE)     &kp C_BRI_DN  &kp C_PREV    &kp C_VOL_DN  &kp C_NEXT    &kp LG(SPACE)
+         &mt LCTRL F11 &kp F4        &kp F5        &kp F6         &kp LC(GRAVE)     &kp C_BRI_DN  &kp C_PREV     &kp C_VOL_DN  &kp C_NEXT     &kp LG(SPACE)
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &kp F10       &kp F1        &kp F2        &kp F3        &kp LC(LS(GRAVE)) &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bootloader
+         &kp F10       &kp F1        &kp F2        &kp F3         &kp LC(LS(GRAVE)) &bt BT_SEL 0  &bt BT_SEL 1   &bt BT_SEL 2  &bt BT_SEL 3   &bootloader
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                     &kp TAB       &kp SPACE     &trans            &trans        &trans        &trans
-    //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+                                     &kp TAB       &kp SPACE      &trans            &trans        &trans         &trans
+    //                                ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
             >;
         };
     };
