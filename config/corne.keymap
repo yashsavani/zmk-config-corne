@@ -21,40 +21,6 @@
 
     behaviors {
         /*
-         * Simplified space layer-tap (no double-tap complexity)
-         * Much more responsive than tap-dance
-         */
-        spc_nav: space_nav_layer {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <150>;
-            quick-tap-ms = <125>;
-            bindings = <&mo>, <&kp>;
-        };
-
-        tab_sym: tab_symbol_layer {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&lt SYM TAB>, <&kp TAB>;
-        };
-
-        ret_fn: return_function_layer {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&lt FN RET>, <&kp RET>;
-        };
-
-        del_alt: delete_alt {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&mt LALT DEL>, <&kp DEL>;
-        };
-
-        /*
          * Optimized homerow modifiers for specific positions
          */
         ctrl_a: control_a {
@@ -75,7 +41,10 @@
             bindings = <&kp>, <&kp>;
         };
 
-        gui_slash: gui_slash {
+        /*
+         * GUI modifiers on . and c
+         */
+        gui_dot: gui_dot {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "balanced";
@@ -84,7 +53,7 @@
             bindings = <&kp>, <&kp>;
         };
 
-        gui_z: gui_z {
+        gui_c: gui_c {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "balanced";
@@ -94,7 +63,7 @@
         };
 
         /*
-         * New alt modifiers for comma and R
+         * Alt modifiers for comma and R
          */
         alt_comma: alt_comma {
             compatible = "zmk,behavior-hold-tap";
@@ -163,19 +132,20 @@
             display-name = "Dvorak";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &kp SQT       &alt_comma LALT COMMA &kp DOT   &kp P         &kp Y             &kp F         &kp G         &kp C         &alt_r RALT R &kp L
+         &kp SQT       &alt_comma LALT COMMA &gui_dot LGUI DOT &kp P       &kp Y             &kp F         &kp G         &gui_c RGUI C &alt_r RALT R &kp L
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
          &ctrl_a LCTRL A  &kp O      &kp E         &kp U         &kp I             &kp D         &kp H         &kp T         &kp N      &ctrl_s RCTRL S
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &gui_slash LGUI FSLH  &kp Q  &kp J        &kp K         &kp X             &kp B         &kp M         &kp W         &kp V      &gui_z RGUI Z
+         &kp FSLH      &kp Q         &kp J         &kp K         &kp X             &kp B         &kp M         &kp W         &kp V         &kp Z
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                     &tab_sym      &spc_nav NAV SPACE &kp LSHFT    &ret_fn       &kp BSPC      &del_alt
+                                     &lt SYM TAB   &lt NAV SPACE &kp LSHFT         &mt LSHFT RET &kp BSPC      &lt FN DEL
     //                               ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
             >;
         };
 
         /*
-         * NAV LAYER: Numbers, navigation, and brackets
+         * NAV LAYER: Numbers, navigation, and brackets  
+         * NOTE: del is pure &kp DEL so space+del works cleanly
          */
         nav_layer {
             display-name = "Nav/Num";
@@ -187,7 +157,7 @@
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
          &kp BSLH      &kp N1        &kp N2        &kp N3        &kp N0            &none         &kp HOME      &none         &kp END       &kp CAPS
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                     &trans        &trans        &trans            &trans        &trans        &trans
+                                     &trans        &trans        &trans            &trans        &trans        &kp DEL
     //                               ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
             >;
         };
@@ -212,6 +182,7 @@
 
         /*
          * FN LAYER: Function keys, media controls, and system functions
+         * NOTE: space is pure &kp SPACE so you can get repeated spaces
          */
         fn_layer {
             display-name = "Function";
@@ -223,8 +194,8 @@
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
          &kp F10       &kp F1        &kp F2        &kp F3        &kp LC(LS(GRAVE)) &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bootloader
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                     &trans        &trans        &trans            &trans        &trans        &trans
-    //                               ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+                                     &kp TAB       &kp SPACE     &trans            &trans        &trans        &trans
+    //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
             >;
         };
     };
