@@ -15,6 +15,10 @@
 #define FN   3
 
 / {
+    chosen {
+        zmk,physical-layout = &foostan_corne_5col_layout;
+    };
+
     behaviors {
         /*
          * Smart thumb layer-taps with double-tap-hold functionality
