@@ -1,7 +1,7 @@
 /*
- * Custom ZMK Configuration for 5-Column Corne
+ * Custom ZMK Configuration for 5-Column Corne  
  * Dvorak layout with thumb-based layer activation
- * Optimized for minimal latency and maximum reliability
+ * Simplified version for maximum compatibility
  */
 
 #include <behaviors.dtsi>
@@ -10,26 +10,14 @@
 
 // Layer definitions
 #define BASE 0
-#define NAV  1  // Num/Nav layer
-#define SYM  2  // Symbol layer (left hand)
-#define FN   3  // Function/Media layer
-
-// Key position definitions for combos
-#define LT0  0  #define LT1  1  #define LT2  2  #define LT3  3  #define LT4  4
-#define LM0  5  #define LM1  6  #define LM2  7  #define LM3  8  #define LM4  9
-#define LB0 10  #define LB1 11  #define LB2 12  #define LB3 13  #define LB4 14
-#define LH0 15  #define LH1 16  #define LH2 17
-
-#define RT0 18  #define RT1 19  #define RT2 20  #define RT3 21  #define RT4 22
-#define RM0 23  #define RM1 24  #define RM2 25  #define RM3 26  #define RM4 27
-#define RB0 28  #define RB1 29  #define RB2 30  #define RB3 31  #define RB4 32
-#define RH0 33  #define RH1 34  #define RH2 35
+#define NAV  1
+#define SYM  2  
+#define FN   3
 
 / {
     behaviors {
         /*
          * Smart thumb layer-taps with double-tap-hold functionality
-         * These provide clean layer access without timing conflicts
          */
         spc_nav: space_nav_layer {
             compatible = "zmk,behavior-tap-dance";
@@ -60,8 +48,7 @@
         };
 
         /*
-         * Optimized homerow alternatives for specific positions
-         * Using shorter timing and strategic placement to minimize conflicts
+         * Optimized homerow modifiers for specific positions
          */
         ctrl_a: control_a {
             compatible = "zmk,behavior-hold-tap";
@@ -109,14 +96,14 @@
         // Base layer combos
         combo_esc {
             timeout-ms = <50>;
-            key-positions = <LT0 LT1>;  // ' + ,
+            key-positions = <0 1>;  // ' + ,
             bindings = <&kp ESC>;
             layers = <BASE>;
         };
 
         combo_underscore {
             timeout-ms = <50>;
-            key-positions = <LT1 LT2>;  // , + .
+            key-positions = <1 2>;  // , + .
             bindings = <&kp UNDER>;
             layers = <BASE>;
         };
@@ -124,7 +111,7 @@
         // Nav layer combos
         combo_grave {
             timeout-ms = <50>;
-            key-positions = <LT0 LT1>;  // [ + 7
+            key-positions = <0 1>;  // [ + 7
             bindings = <&kp GRAVE>;
             layers = <NAV>;
         };
@@ -132,7 +119,7 @@
         // Sym layer combos  
         combo_tilde {
             timeout-ms = <50>;
-            key-positions = <LT0 LT1>;  // { + &
+            key-positions = <0 1>;  // { + &
             bindings = <&kp TILDE>;
             layers = <SYM>;
         };
@@ -170,7 +157,7 @@
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
          &kp SEMI      &kp N4        &kp N5        &kp N6        &kp EQUAL         &kp PG_DN     &kp LEFT      &kp DOWN      &kp RIGHT     &kp N
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &kp BSLH      &kp N1        &kp N2        &kp N3        &kp N0            &none         &kp HOME      &none         &kp END       &caps_word
+         &kp BSLH      &kp N1        &kp N2        &kp N3        &kp N0            &none         &kp HOME      &none         &kp END       &kp CAPS
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
                                      &trans        &trans        &trans            &trans        &trans        &trans
     //                               ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
@@ -202,11 +189,11 @@
             display-name = "Function";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &kp F12       &kp F7        &kp F8        &kp F9        &kp LS(LC(LALT))  &kp C_BRI_UP  &kp C_MUTE    &kp C_VOL_UP  &kp C_PP      &kp C_NEXT
+         &kp F12       &kp F7        &kp F8        &kp F9        &kp LC(LS(LALT))  &kp C_BRI_UP  &kp C_MUTE    &kp C_VOL_UP  &kp C_PP      &kp C_NEXT
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
          &kp F11       &kp F4        &kp F5        &kp F6        &kp LC(GRAVE)     &kp C_BRI_DN  &kp C_PREV    &kp C_VOL_DN  &kp C_NEXT    &kp LG(SPACE)
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &kp F10       &kp F1        &kp F2        &kp F3        &kp LS(LC(GRAVE)) &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bootloader
+         &kp F10       &kp F1        &kp F2        &kp F3        &kp LC(LS(GRAVE)) &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bootloader
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
                                      &trans        &trans        &trans            &trans        &trans        &trans
     //                               ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
