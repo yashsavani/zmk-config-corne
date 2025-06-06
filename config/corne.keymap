@@ -94,6 +94,9 @@
             bindings = <&bt BT_SEL 3>, <&bt_3_clear>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
+        &caps_word {
+            continue-list = <UNDERSCORE MINUS>;
+        };
     };
 
     /*
@@ -139,14 +142,14 @@
             display-name = "Dvorak";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &kp SQT       &mt LALT COMMA &mt LGUI DOT &kp P          &kp Y             &kp F         &kp G          &mt RGUI C    &mt RALT R     &kp L
+         &kp SQT       &mt LALT COMMA &mt LGUI DOT &kp P         &kp Y             &kp F         &kp G         &mt RGUI C    &mt RALT R    &kp L
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &mt LCTRL A   &kp O         &kp E         &kp U          &kp I             &kp D         &kp H          &kp T         &kp N          &mt RCTRL S
+         &mt LCTRL A   &kp O         &kp E         &kp U         &kp I             &kp D         &kp H         &kp T         &kp N         &mt RCTRL S
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &kp FSLH      &kp Q         &kp J         &kp K          &kp X             &kp B         &kp M          &kp W         &kp V          &kp Z
+         &kp FSLH      &kp Q         &kp J         &kp K         &kp X             &kp B         &kp M         &kp W         &kp V         &kp Z
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                     &lt SYM TAB   &mt LSHFT SPACE &lt NAV MINUS    &lt FN RET    &mt RSHFT BSPC &mt RGUI DEL
-    //                                ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+                                     &lt SYM TAB   &mt LSHFT SPACE &lt NAV MINUS   &lt FN RET    &mt RSHFT BSPC &mt RGUI DEL
+    //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
             >;
         };
 
@@ -159,14 +162,14 @@
             display-name = "Nav/Num";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &kp BSLH      &mt LALT N7   &mt LGUI N8   &kp N9         &kp N0            &kp RIGHT     &kp LG(LS(LC(N4))) &kp UP     &trans        &kp RIGHT
+         &kp BSLH      &mt LALT N7   &mt LGUI N8   &kp N9        &kp N0            &kp RIGHT      &kp PG_UP    &kp UP        &mt RALT F19  &kp RIGHT
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &mt LCTRL SEMI &kp N4       &kp N5        &kp N6         &kp EQUAL         &kp PG_UP     &kp LEFT       &kp DOWN       &kp RIGHT     &trans
+         &mt LCTRL SEMI &kp N4       &kp N5        &kp N6        &kp EQUAL         &kp LG(LS(LC(N4))) &kp LEFT &kp DOWN      &kp RIGHT     &mt RCTRL F24
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &kp LBKT      &kp N1        &kp N2        &kp N3         &kp RBKT          &kp LEFT      &kp HOME       &kp PG_DN      &kp END       &caps_word
+         &kp LBKT      &kp N1        &kp N2        &kp N3        &kp RBKT          &kp LEFT      &kp HOME      &kp PG_DN     &kp END       &caps_word
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
                                      &trans        &trans         &trans            &kp RET       &trans         &trans
-    //                                ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+    //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
             >;
         };
 
@@ -178,14 +181,14 @@
             display-name = "Symbol";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &kp PIPE      &mt LALT AMPS &mt LGUI ASTRK &kp LPAR      &kp RPAR          &trans         &trans        &trans        &trans         &trans
+         &kp PIPE      &mt LALT AMPS &mt LGUI ASTRK &kp LPAR     &kp RPAR          &kp F16       &kp F17       &mt RGUI F18  &mt RALT F19  &kp RIGHT
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &mt LCTRL COLON &kp DLLR    &kp PRCNT     &kp CARET      &kp PLUS          &trans         &trans        &trans        &trans         &trans
+         &mt LCTRL COLON &kp DLLR    &kp PRCNT     &kp CARET     &kp PLUS          &kp LG(LS(N4)) &kp LEFT     &kp F15       &kp RIGHT     &mt RCTRL F24
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &kp LBRC      &kp EXCL      &kp AT        &kp HASH       &kp RBRC          &trans         &trans        &trans        &trans         &trans
+         &kp LBRC      &kp EXCL      &kp AT        &kp HASH      &kp RBRC          &kp F20       &kp F21       &kp F22       &kp F23       &caps_word
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                     &trans        &trans         &trans            &kp RET       &kp BSPC       &kp DEL
-    //                                ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+                                     &trans        &trans        &trans             &kp RET       &kp BSPC      &kp DEL
+    //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
             >;
         };
 
@@ -198,14 +201,14 @@
             display-name = "Function";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &kp F12       &mt LALT F7   &mt LGUI F8   &kp F9         &kp F13           &kp C_BRI_UP  &kp C_MUTE     &kp C_VOL_UP  &kp C_PP       &kp C_NEXT
+         &kp F12       &mt LALT F7   &mt LGUI F8   &kp F9        &kp F14           &kp C_BRI_UP  &kp C_MUTE    &kp C_VOL_UP  &kp C_PP      &kp C_NEXT
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &mt LCTRL F11 &kp F4        &kp F5        &kp F6         &kp F14           &kp C_BRI_DN  &kp C_PREV     &kp C_VOL_DN  &kp C_NEXT     &kp LG(SPACE)
+         &mt LCTRL F11 &kp F4        &kp F5        &kp F6        &kp F13           &kp C_BRI_DN  &kp C_PREV    &kp C_VOL_DN  &kp C_NEXT    &kp C_AC_SEARCH
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &kp F10       &kp F1        &kp F2        &kp F3         &bootloader       &bt0          &bt1           &bt2          &bt3           &bootloader
+         &kp F10       &kp F1        &kp F2        &kp F3        &bootloader       &bt0          &bt1          &bt2          &bt3          &bootloader
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                     &kp TAB       &kp SPACE      &trans            &trans        &trans         &trans
-    //                                ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+                                     &kp TAB       &kp SPACE     &kp C_AC_DESKTOP_SHOW_ALL_WINDOWS &trans &trans &trans
+    //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
             >;
         };
     };
