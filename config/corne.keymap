@@ -1,90 +1,216 @@
 /*
- * Copyright (c) 2020 The ZMK Contributors
- *
- * SPDX-License-Identifier: MIT
+ * Custom ZMK Configuration for 5-Column Corne
+ * Dvorak layout with thumb-based layer activation
+ * Optimized for minimal latency and maximum reliability
  */
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
+// Layer definitions
+#define BASE 0
+#define NAV  1  // Num/Nav layer
+#define SYM  2  // Symbol layer (left hand)
+#define FN   3  // Function/Media layer
 
-#define AS(keycode) &as LS(keycode) keycode
+// Key position definitions for combos
+#define LT0  0  #define LT1  1  #define LT2  2  #define LT3  3  #define LT4  4
+#define LM0  5  #define LM1  6  #define LM2  7  #define LM3  8  #define LM4  9
+#define LB0 10  #define LB1 11  #define LB2 12  #define LB3 13  #define LB4 14
+#define LH0 15  #define LH1 16  #define LH2 17
+
+#define RT0 18  #define RT1 19  #define RT2 20  #define RT3 21  #define RT4 22
+#define RM0 23  #define RM1 24  #define RM2 25  #define RM3 26  #define RM4 27
+#define RB0 28  #define RB1 29  #define RB2 30  #define RB3 31  #define RB4 32
+#define RH0 33  #define RH1 34  #define RH2 35
 
 / {
-    chosen {
-        zmk,physical-layout = &foostan_corne_5col_layout;
-    };
-
     behaviors {
-        as: auto_shift {
+        /*
+         * Smart thumb layer-taps with double-tap-hold functionality
+         * These provide clean layer access without timing conflicts
+         */
+        spc_nav: space_nav_layer {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&lt NAV SPACE>, <&kp SPACE>;
+        };
+
+        tab_sym: tab_symbol_layer {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&lt SYM TAB>, <&kp TAB>;
+        };
+
+        ret_fn: return_function_layer {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&lt FN RET>, <&kp RET>;
+        };
+
+        del_alt: delete_alt {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&mt LALT DEL>, <&kp DEL>;
+        };
+
+        /*
+         * Optimized homerow alternatives for specific positions
+         * Using shorter timing and strategic placement to minimize conflicts
+         */
+        ctrl_a: control_a {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping_term_ms = <200>;
-            quick_tap_ms = <0>;
-            flavor = "tap-preferred";
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <125>;
+            bindings = <&kp>, <&kp>;
+        };
+
+        ctrl_s: control_s {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <125>;
+            bindings = <&kp>, <&kp>;
+        };
+
+        gui_slash: gui_slash {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <125>;
+            bindings = <&kp>, <&kp>;
+        };
+
+        gui_z: gui_z {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <125>;
             bindings = <&kp>, <&kp>;
         };
     };
-        keymap {
-                compatible = "zmk,keymap";
 
-                default_layer {
-// -----------------------------------------------------------------------------------------
-// |  Q  |  W  |  E  |  R  |  T  |     |  Y  |  U   |  I   |  O   | P |
-// |  A  |  S  |  D  |  F  |  G  |     |  H  |  J   |  K   |  L   | ' | 
-// |  Z  |  X  |  C  |  V  |  B  |     |  N  |  M   | CTRL | META | . |
-//             | GUI | LWR | SPC |     | ENT | RSE  | BSPC |
-                        display-name = "Base";
-                        bindings = <
-   AS(Q) AS(W) AS(E) AS(R) AS(T)     AS(Y)   AS(U)  AS(I)     AS(O)     AS(P)
-   AS(A) AS(S) AS(D) AS(F) AS(G)     AS(H)   AS(J)  AS(K)     AS(L)     AS(SQT)
-   AS(Z) AS(X) AS(C) AS(V) AS(B)     AS(N)   AS(M)  &kp LCTL  &kp RALT  AS(DOT)
-        &kp LGUI &mo 1 &kp SPACE     AS(RET) &mo 2  &kp BSPC
-                        >;
-                };
-
-                lower_layer {
-// -----------------------------------------------------------------------------------------
-// | !     |  @  |  #  |  $  |  %  |     |  ^  |  &  |  *  |  (  |  )  |
-// | BT1   | BT2 | BT3 | BT4 | BT5 |     | LFT | DWN |  UP | RGT |     |
-// | BTCLR |     |     |     |     |     |     |     |     |     |     |
-//               | GUI |     | SPC |     | ENT | ESC | TAB |
-                        display-name = "Lower";
-                        bindings = <
-   &kp EXCL     &kp AT       &kp HASH     &kp DLLR     &kp PRCNT        &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR  &kp RPAR
-   &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4     &kp LEFT  &kp DOWN  &kp UP          &kp RIGHT &trans 
-   &bt BT_CLR   &trans       &trans       &trans       &trans           &trans    &trans    &trans          &trans    &trans 
-                             &kp LGUI     &trans       &kp SPACE        AS(RET)   &kp ESC   &kp TAB
-                        >;
-                };
-
-                raise_layer {
-// -----------------------------------------------------------------------------------------
-// | 1! |  2@ |  3# |  4$ |  5% |     |  6^ |  7& |  8* |  9(  |  0)  |
-// | -_ |  =+ |  {  |  [  |  (  |     |  )  |  ]  |  }  |  /?  |  \|  |
-// | `~ |     |     |  ,< |  :  |     |  ;  |  .> | CTRL| META |      |
-//            | GUI | ESC | SPC |     | ENT |     | TAB |
-                        display-name = "Raise";
-                        bindings = <
-
-   AS(N1)    AS(N2)    AS(N3)    AS(N4)    AS(N5)        AS(N6)    AS(N7)    AS(N8)    AS(N9)   AS(N0)
-   AS(MINUS) AS(EQUAL) &kp LBRC  &kp LBKT  &kp LPAR      &kp RPAR  &kp RBKT  &kp RBRC  AS(FSLH) AS(BSLH)
-   AS(GRAVE) &trans    &trans    AS(COMMA) &kp COLON     &kp SEMI  AS(DOT)   &kp LCTRL &kp RALT &trans
-                       &kp LGUI  &kp ESC   &kp SPACE     AS(RET)   &trans    &kp TAB
-                        >;
-                };
-
-                extra_1 {
-                        status = "reserved";
-                };
-
-                extra_2 {
-                        status = "reserved";
-                };
-
-                extra_3 {
-                        status = "reserved";
-                };
+    /*
+     * Combo definitions for enhanced typing efficiency
+     */
+    combos {
+        compatible = "zmk,combos";
+        
+        // Base layer combos
+        combo_esc {
+            timeout-ms = <50>;
+            key-positions = <LT0 LT1>;  // ' + ,
+            bindings = <&kp ESC>;
+            layers = <BASE>;
         };
+
+        combo_underscore {
+            timeout-ms = <50>;
+            key-positions = <LT1 LT2>;  // , + .
+            bindings = <&kp UNDER>;
+            layers = <BASE>;
+        };
+
+        // Nav layer combos
+        combo_grave {
+            timeout-ms = <50>;
+            key-positions = <LT0 LT1>;  // [ + 7
+            bindings = <&kp GRAVE>;
+            layers = <NAV>;
+        };
+
+        // Sym layer combos  
+        combo_tilde {
+            timeout-ms = <50>;
+            key-positions = <LT0 LT1>;  // { + &
+            bindings = <&kp TILDE>;
+            layers = <SYM>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        /*
+         * BASE LAYER: Dvorak with strategic modifier placement
+         */
+        base_layer {
+            display-name = "Dvorak";
+            bindings = <
+    // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
+         &kp SQT       &kp COMMA     &kp DOT       &kp P         &kp Y             &kp F         &kp G         &kp C         &kp R         &kp L
+    // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+         &ctrl_a LCTRL A  &kp O      &kp E         &kp U         &kp I             &kp D         &kp H         &kp T         &kp N      &ctrl_s RCTRL S
+    // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+         &gui_slash LGUI FSLH  &kp Q  &kp J        &kp K         &kp X             &kp B         &kp M         &kp W         &kp V      &gui_z RGUI Z
+    // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
+                                     &tab_sym      &spc_nav      &kp LSHFT         &ret_fn       &kp BSPC      &del_alt
+    //                               ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+            >;
+        };
+
+        /*
+         * NAV LAYER: Numbers, navigation, and brackets
+         */
+        nav_layer {
+            display-name = "Nav/Num";
+            bindings = <
+    // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
+         &kp LBKT      &kp N7        &kp N8        &kp N9        &kp RBKT          &kp PG_UP     &kp PSCRN     &kp UP        &none         &kp RIGHT
+    // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+         &kp SEMI      &kp N4        &kp N5        &kp N6        &kp EQUAL         &kp PG_DN     &kp LEFT      &kp DOWN      &kp RIGHT     &kp N
+    // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+         &kp BSLH      &kp N1        &kp N2        &kp N3        &kp N0            &none         &kp HOME      &none         &kp END       &caps_word
+    // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
+                                     &trans        &trans        &trans            &trans        &trans        &trans
+    //                               ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+            >;
+        };
+
+        /*
+         * SYM LAYER: Symbols (left hand only for efficiency)
+         */
+        sym_layer {
+            display-name = "Symbol";
+            bindings = <
+    // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
+         &kp LBRC      &kp AMPS      &kp LPAR      &kp RPAR      &kp RBRC          &none         &none         &none         &none         &none
+    // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+         &kp COLON     &kp DLLR      &kp PRCNT     &kp CARET     &kp PLUS          &none         &none         &none         &none         &none
+    // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+         &kp PIPE      &kp EXCL      &kp AT        &kp HASH      &kp ASTRK         &none         &none         &none         &none         &none
+    // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
+                                     &trans        &trans        &trans            &trans        &trans        &trans
+    //                               ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+            >;
+        };
+
+        /*
+         * FN LAYER: Function keys, media controls, and system functions
+         */
+        fn_layer {
+            display-name = "Function";
+            bindings = <
+    // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
+         &kp F12       &kp F7        &kp F8        &kp F9        &kp LS(LC(LALT))  &kp C_BRI_UP  &kp C_MUTE    &kp C_VOL_UP  &kp C_PP      &kp C_NEXT
+    // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+         &kp F11       &kp F4        &kp F5        &kp F6        &kp LC(GRAVE)     &kp C_BRI_DN  &kp C_PREV    &kp C_VOL_DN  &kp C_NEXT    &kp LG(SPACE)
+    // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+         &kp F10       &kp F1        &kp F2        &kp F3        &kp LS(LC(GRAVE)) &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bootloader
+    // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
+                                     &trans        &trans        &trans            &trans        &trans        &trans
+    //                               ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+            >;
+        };
+    };
 };
