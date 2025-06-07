@@ -104,6 +104,18 @@
             key-positions = <10 11>;  // ' + ,
             bindings = <&kp ESC>;
         };
+        combo_lpar {
+            timeout-ms = <50>;
+            key-positions = <1 2>;  // ' + ,
+            bindings = <&kp LPAR>;
+            layers = <BASE>;
+        };
+        combo_rpar {
+            timeout-ms = <50>;
+            key-positions = <2 3>;  // ' + ,
+            bindings = <&kp RPAR>;
+            layers = <BASE>;
+        };
         // Nav layer combos
         combo_grave {
             timeout-ms = <50>;
@@ -111,11 +123,35 @@
             bindings = <&kp GRAVE>;
             layers = <BASE NAV FN>;
         };
+        combo_lbkt {
+            timeout-ms = <50>;
+            key-positions = <1 2>;  // ' + ,
+            bindings = <&kp LBKT>;
+            layers = <NAV>;
+        };
+        combo_rbkt {
+            timeout-ms = <50>;
+            key-positions = <2 3>;  // ' + ,
+            bindings = <&kp RBKT>;
+            layers = <NAV>;
+        };
         // Sym layer combos  
         combo_tilde {
             timeout-ms = <50>;
             key-positions = <0 1>;  // { + &
             bindings = <&kp TILDE>;
+            layers = <SYM>;
+        };
+        combo_lbrc {
+            timeout-ms = <50>;
+            key-positions = <1 2>;  // ' + ,
+            bindings = <&kp LBRC>;
+            layers = <SYM>;
+        };
+        combo_rbrc {
+            timeout-ms = <50>;
+            key-positions = <2 3>;  // ' + ,
+            bindings = <&kp RBRC>;
             layers = <SYM>;
         };
     };
@@ -168,14 +204,14 @@
          * Programming symbols accessible without moving right hand
          */
         sym_layer {
-            display-name = "Symbol";
+            display-name = "Sym/Media";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &kp PIPE      &mt LALT AMPS &mt LGUI ASTRK &kp LPAR     &kp RPAR          &kp LG(LS(N5)) &kp F17      &mt RGUI F18  &mt RALT F19  &kp RIGHT
+         &kp PIPE      &mt LALT AMPS &mt LGUI ASTRK &kp LPAR     &kp RPAR          &kp C_BRI_UP  &kp C_MUTE    &kp C_VOL_UP  &kp C_PP      &kp C_NEXT
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &mt LCTRL COLON &kp DLLR    &kp PRCNT     &kp CARET     &kp PLUS          &kp LG(LS(N4)) &kp LEFT     &kp F15       &kp RIGHT     &mt RCTRL F16
+         &mt LCTRL COLON &kp DLLR    &kp PRCNT     &kp CARET     &kp PLUS          &kp C_BRI_DN  &kp C_PREV    &kp C_VOL_DN  &kp C_NEXT    &kp LG(SPACE)
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &kp LBRC      &kp EXCL      &kp AT        &kp HASH      &kp RBRC          &kp F20       &kp F21       &kp F22       &kp F23       &caps_word
+         &kp LBRC      &kp EXCL      &kp AT        &kp HASH      &kp RBRC          &kp LG(LS(LC(N4))) &kp LG(LS(N4)) &kp LG(LS(N5)) &kp F23 &caps_word
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
                                      &kp MINUS     &kp SPACE     &kp TAB           &trans        &trans        &trans
     //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
@@ -191,14 +227,14 @@
             display-name = "Function";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &kp F12       &mt LALT F7   &mt LGUI F8   &kp F9        &kp F14           &kp C_BRI_UP  &kp C_MUTE    &kp C_VOL_UP  &kp C_PP      &kp C_NEXT
+         &kp F12       &mt LALT F7   &mt LGUI F8   &kp F9        &kp F14           &kp LG(LS(N5)) &kp F17      &mt RGUI F18  &mt RALT F19  &kp RIGHT
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &mt LCTRL F11 &kp F4        &kp F5        &kp F6        &kp F13           &kp C_BRI_DN  &kp C_PREV    &kp C_VOL_DN  &kp C_NEXT    &kp LG(SPACE)
+         &mt LCTRL F11 &kp F4        &kp F5        &kp F6        &kp F13           &kp LG(LS(N4)) &kp LEFT     &kp F15       &kp RIGHT     &mt RCTRL F16
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
          &kp F10       &kp F1        &kp F2        &kp F3        &bootloader       &bt0          &bt1          &bt2          &bt3          &bootloader
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
                                      &trans        &trans        &trans            &kp RET       &kp BSPC      &kp DEL
-    //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+    //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯                              
             >;
         };
     };
