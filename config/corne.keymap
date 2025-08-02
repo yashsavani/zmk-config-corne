@@ -91,6 +91,12 @@
             bindings = <&bt BT_SEL 3>, <&bt_3_clear>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
+        r_ralt: r_ralt {
+            compatible: "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp R>, <&mt RALT R>;
+            mods = <(MOD_LSFT|MOD_RSFT);
+        };
     };
 
     /*
@@ -146,13 +152,13 @@
             timeout-ms = <50>;
             key-positions = <1 2>;  // ' + ,
             bindings = <&kp LBRC>;
-            layers = <SYM>;
+            layers = <SYM FN>;
         };
         combo_rbrc {
             timeout-ms = <50>;
             key-positions = <2 3>;  // ' + ,
             bindings = <&kp RBRC>;
-            layers = <SYM>;
+            layers = <SYM FN>;
         };
     };
 
@@ -168,7 +174,7 @@
             display-name = "Dvorak";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &kp SQT       &mt LALT COMMA &mt LGUI DOT &kp P         &kp Y             &kp F         &kp G         &mt RGUI C    &mt RALT R    &kp L
+         &kp SQT       &mt LALT COMMA &mt LGUI DOT &kp P         &kp Y             &kp F         &kp G         &mt RGUI C    &r_ralt       &kp L
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
          &mt LCTRL A   &kp O         &kp E         &kp U         &kp I             &kp D         &kp H         &kp T         &kp N         &mt RCTRL S
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
@@ -192,7 +198,7 @@
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
          &mt LCTRL SEMI &kp N4       &kp N5        &kp N6        &kp EQUAL         &kp LG(LS(LC(N4))) &kp LEFT &kp DOWN      &kp RIGHT     &trans
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &kp LBKT      &kp N1        &kp N2        &kp N3        &kp RBKT          &kp LEFT      &kp HOME      &kp PG_DN     &kp END       &caps_word
+         &kp COLON      &kp N1       &kp N2        &kp N3        &kp EXCL          &kp LEFT      &kp HOME      &kp PG_DN     &kp END       &caps_word
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
                                      &trans        &trans        &trans            &kp RET       &trans        &trans
     //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
