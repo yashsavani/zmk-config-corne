@@ -121,6 +121,12 @@
             bindings = <&kp R>, <&mt RALT R>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
+        r_td: r_td {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp R>, <&mt RALT R>;
+        };
         colon_semicolon: colon_semicolon {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
@@ -229,7 +235,7 @@
             display-name = "Dvorak";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &colon_semicolon &mt LALT COMMA &mt LGUI DOT &kp P      &kp Y             &kp F         &kp G         &mt RGUI C    &r_ralt       &kp L
+         &colon_semicolon &mt LALT COMMA &mt LGUI DOT &kp P      &kp Y             &kp F         &kp G         &mt RGUI C    &r_td         &kp L
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
          &mt LCTRL A   &kp O         &kp E         &kp U         &kp I             &kp D         &kp H         &kp T         &kp N         &mt RCTRL S
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
@@ -268,11 +274,11 @@
             display-name = "Sym/Media";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &kp PIPE      &mt LALT AMPS &mt LGUI ASTRK &kp LPAR     &kp RPAR          &kp C_BRI_UP  &kp LS(TAB)   &mt RGUI C_VOL_UP &kp LG(TAB) &kp C_PP
+         &kp BSLH      &mt LALT AMPS &mt LGUI ASTRK &kp LPAR     &kp RPAR          &kp C_BRI_UP  &kp LS(TAB)   &mt RGUI C_VOL_UP &kp LG(TAB) &kp C_PP
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &mt LCTRL QMARK &kp DLLR    &kp PRCNT     &kp CARET     &kp DLLR          &kp C_BRI_DN  &kp C_PREV    &kp C_VOL_DN  &kp C_NEXT    &mt RCTRL C_MUTE
+         &mt LCTRL FSLH &kp DLLR     &kp PRCNT     &kp CARET     &kp DLLR          &kp C_BRI_DN  &kp C_PREV    &kp C_VOL_DN  &kp C_NEXT    &mt RCTRL C_MUTE
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &kp BSPC      &kp EXCL      &kp AT        &kp HASH      &kp DEL           &kp LG(LS(LC(N4))) &kp LC(LS(TAB)) &kp LG(LS(N4)) &kp LC(TAB) &kp LG(LS(N5))
+         &kp QMARK     &kp EXCL      &kp AT        &kp HASH      &kp EXCL          &kp LG(LS(LC(N4))) &kp LC(LS(TAB)) &kp LG(LS(N4)) &kp LC(TAB) &kp LG(LS(N5))
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
                                      &kp MINUS     &kp SPACE     &kp TAB           &trans        &trans        &trans
     //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
