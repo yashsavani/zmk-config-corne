@@ -104,6 +104,12 @@
             mods = <(MOD_LSFT|MOD_RSFT)>;
             keep-mods = <(MOD_LSFT|MOD_RSFT)>;
         };
+        test_shift: test_shift {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp A>, <&kp B>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
     };
 
     /*
@@ -184,7 +190,7 @@
             display-name = "Dvorak";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &kp SQT       &mt LALT COMMA &mt LGUI DOT &kp P         &kp Y             &kp F         &kp G         &mt RGUI C    &r_ralt       &kp L
+         &test_shift       &mt LALT COMMA &mt LGUI DOT &kp P         &kp Y             &kp F         &kp G         &mt RGUI C    &r_ralt       &kp L
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
          &mt LCTRL A   &kp O         &kp E         &kp U         &kp I             &kp D         &kp H         &kp T         &kp N         &mt RCTRL S
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
