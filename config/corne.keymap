@@ -105,7 +105,7 @@
         };
         colon_semicolon_ht: colon_semicolon_ht {
             compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <0>;
+            #binding-cells = <2>;
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
             bindings = <&colon_semicolon>;
