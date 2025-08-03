@@ -53,18 +53,10 @@
             #binding-cells = <0>;
             bindings = <&macro_press &kp LSHFT>, <&macro_tap &kp SEMI>, <&macro_release &kp LSHFT>;
         };
-        
         macro_semi: macro_semi {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&macro_release &kp LSHFT>, <&macro_release &kp RSHFT>, <&macro_tap &kp SEMI>;
-        };
-        macro_semi: macro_semi {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <10>;
-            bindings = <&macro_release &kp LSHFT &kp RSHFT>, <&kp SEMI>;
         };
     };
 
