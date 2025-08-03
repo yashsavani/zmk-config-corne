@@ -55,7 +55,6 @@
             tap-ms = <10>;
             bindings = <&macro_tap &kp LS(SEMI)>;
         };
-        
         send_semi: send_semi {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -117,7 +116,7 @@
         colon_semicolon: colon_semicolon {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp LS(SEMI)>, <&kp SEMI>;
+            bindings = <&send_colon>, <&send_semi>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
             keep-mods = <(MOD_LSFT|MOD_RSFT)>;
         };
