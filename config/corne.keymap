@@ -216,9 +216,9 @@
             display-name = "Sym/Media";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &kp PIPE      &mt LALT AMPS &mt LGUI ASTRK &kp LPAR     &kp RPAR          &kp C_BRI_UP  &kp LG(LS(TAB)) &kp C_VOL_UP &kp LG(TAB)  &kp C_PP
+         &kp PIPE      &mt LALT AMPS &mt LGUI ASTRK &kp LPAR     &kp RPAR          &kp C_BRI_UP  &kp LS(TAB)   &mt RGUI C_VOL_UP &kp LG(TAB) &kp C_PP
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &mt LCTRL QMARK &kp DLLR    &kp PRCNT     &kp CARET     &kp DLLR          &kp C_BRI_DN  &kp C_PREV    &kp C_VOL_DN  &kp C_NEXT    &kp C_MUTE
+         &mt LCTRL QMARK &kp DLLR    &kp PRCNT     &kp CARET     &kp DLLR          &kp C_BRI_DN  &kp C_PREV    &kp C_VOL_DN  &kp C_NEXT    &mt RCTRL C_MUTE
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
          &kp BSPC      &kp EXCL      &kp AT        &kp HASH      &kp DEL           &kp LG(LS(LC(N4))) &kp LC(LS(TAB)) &kp LG(LS(N4)) &kp LC(TAB) &kp LG(LS(N5))
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
@@ -236,9 +236,9 @@
             display-name = "Function";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &kp F12       &mt LALT F7   &mt LGUI F8   &kp F9        &kp LC(TAB)       &kp LG(LC(TAB)) &kp F17     &mt RGUI F18  &mt RALT F19  &kp LG(TAB)
+         &kp F12       &mt LALT F7   &mt LGUI F8   &kp F9        &kp TAB           &trans        &kp F17       &mt RGUI F18  &mt RALT F19  &trans
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &mt LCTRL F11 &kp F4        &kp F5        &kp F6        &kp LC(LS(TAB))   &kp F13       &kp F14       &kp F15       &kp F16       &mt RCTRL LG(LC(TAB))
+         &mt LCTRL F11 &kp F4        &kp F5        &kp F6        &kp LS(TAB)       &kp F13       &kp F14       &kp F15       &kp F16       &trans
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
          &kp F10       &kp F1        &kp F2        &kp F3        &bootloader       &bt0          &bt1          &bt2          &bt3          &bootloader
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
