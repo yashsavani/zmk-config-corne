@@ -195,25 +195,25 @@
             timeout-ms = <50>;
             key-positions = <1 2>;
             bindings = <&kp LBKT>;
-            layers = <NAV>;
+            layers = <NAV SYM>;
         };
         combo_rbkt {
             timeout-ms = <50>;
             key-positions = <2 3>;
             bindings = <&kp RBKT>;
-            layers = <NAV>;
+            layers = <NAV SYM>;
         };
         combo_lbrc {
             timeout-ms = <50>;
             key-positions = <1 2>;
             bindings = <&kp LBRC>;
-            layers = <SYM FN>;
+            layers = <FN>;
         };
         combo_rbrc {
             timeout-ms = <50>;
             key-positions = <2 3>;
             bindings = <&kp RBRC>;
-            layers = <SYM FN>;
+            layers = <FN>;
         };
     };
 
