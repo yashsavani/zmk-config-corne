@@ -71,8 +71,7 @@
             wait-ms = <0>;
             tap-ms = <10>;
             bindings = <&macro_release &kp LSHFT &kp RSHFT>
-                    , <&macro_tap &kp SEMI>
-                    , <&macro_press &kp LSHFT &kp RSHFT>;
+                    , <&macro_tap &kp SEMI>;
         };
     };
 
