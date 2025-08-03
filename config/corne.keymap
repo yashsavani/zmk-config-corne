@@ -48,6 +48,23 @@
             wait-ms = <10>;
             bindings = <&bt BT_SEL 3>, <&bt BT_CLR>;
         };
+        send_colon: send_colon {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <10>;
+            bindings = <&macro_tap &kp LS(SEMI)>;
+        };
+        
+        send_semi: send_semi {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <10>;
+            bindings = <&macro_release &kp LSHFT &kp RSHFT>
+                    , <&macro_tap &kp SEMI>
+                    , <&macro_press &kp LSHFT &kp RSHFT>;
+        };
     };
 
     behaviors {
@@ -55,7 +72,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <150>;
+            tapping-term-ms = <200>;
             bindings = <&kp>, <&kp>;
             display-name = "Mod-Tap";
         };
@@ -184,7 +201,7 @@
             display-name = "Dvorak";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &mt SQT DQT   &mt LALT COMMA &mt LGUI DOT &kp P         &kp Y             &kp F         &kp G         &mt RGUI C    &r_ralt       &kp L
+         &mt DQT SQT   &mt LALT COMMA &mt LGUI DOT &kp P         &kp Y             &kp F         &kp G         &mt RGUI C    &r_ralt       &kp L
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
          &mt LCTRL A   &kp O         &kp E         &kp U         &kp I             &kp D         &kp H         &kp T         &kp N         &mt RCTRL S
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
