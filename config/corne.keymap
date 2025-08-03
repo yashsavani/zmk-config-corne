@@ -48,16 +48,6 @@
             wait-ms = <10>;
             bindings = <&bt BT_SEL 3>, <&bt BT_CLR>;
         };
-        macro_colon: macro_colon {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&macro_press &kp LSHFT>, <&macro_tap &kp SEMI>, <&macro_release &kp LSHFT>;
-        };
-        macro_semi: macro_semi {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&macro_release &kp LSHFT>, <&macro_release &kp RSHFT>, <&macro_tap &kp SEMI>;
-        };
     };
 
     behaviors {
@@ -110,8 +100,9 @@
         colon_semicolon: colon_semicolon {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&macro_colon>, <&macro_semi>;
+            bindings = <&kp COLON>, <&kp SEMI>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
+            keep-mods = <(MOD_LSFT|MOD_RSFT)>;
         };
     };
 
