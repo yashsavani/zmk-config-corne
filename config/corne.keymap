@@ -48,23 +48,6 @@
             wait-ms = <10>;
             bindings = <&bt BT_SEL 3>, <&bt BT_CLR>;
         };
-        send_colon: send_colon {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <0>;
-            tap-ms = <10>;
-            bindings = <&macro_tap &kp LS(SEMI)>;
-        };
-        send_semi: send_semi {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <0>;
-            tap-ms = <10>;
-            bindings = <&macro_release &kp LSHFT &kp RSHFT>
-                    , <&macro_tap &kp SEMI>
-                    , <&macro_press &kp LSHFT &kp RSHFT>;
-        };
-
         semi_no_shift: semi_no_shift {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -72,6 +55,22 @@
             tap-ms = <10>;
             bindings = <&macro_release &kp LSHFT &kp RSHFT>
                     , <&macro_tap &kp SEMI>;
+        };
+        lbkt_no_shift: lbkt_no_shift {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <10>;
+            bindings = <&macro_release &kp LSHFT &kp RSHFT>
+                    , <&macro_tap &kp LBKT>;
+        };
+        rbkt_no_shift: rbkt_no_shift {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <10>;
+            bindings = <&macro_release &kp LSHFT &kp RSHFT>
+                    , <&macro_tap &kp RBKT>;
         };
     };
 
@@ -131,14 +130,13 @@
         lpar_lbkt: left_paren_bracket {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp LPAR>, <&kp LBKT>;
+            bindings = <&kp LPAR>, <&lbkt_no_shift>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-        
         rpar_rbkt: right_paren_bracket {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp RPAR>, <&kp RBKT>;
+            bindings = <&kp RPAR>, <&rbkt_no_shift>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
     };
@@ -221,11 +219,11 @@
             display-name = "Dvorak";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &mt DQT SQT   &mt LALT COMMA &mt LGUI DOT &kp P         &kp Y             &kp F         &kp G         &mt RGUI C    &r_ralt       &kp L
+         &colon_semicolon &mt LALT COMMA &mt LGUI DOT &kp P      &kp Y             &kp F         &kp G         &mt RGUI C    &r_ralt       &kp L
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
          &mt LCTRL A   &kp O         &kp E         &kp U         &kp I             &kp D         &kp H         &kp T         &kp N         &mt RCTRL S
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &colon_semicolon &kp Q      &kp J         &kp K         &kp X             &kp B         &kp M         &kp W         &kp V         &kp Z
+         &mt DQT SQT   &kp Q         &kp J         &kp K         &kp X             &kp B         &kp M         &kp W         &kp V         &kp Z
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
                                      &lt FN MINUS  &mt LSHFT SPACE &lt NAV TAB     &lt SYM RET   &mt RSHFT BSPC &mt RGUI UNDER
     //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
