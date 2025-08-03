@@ -103,6 +103,13 @@
             bindings = <&kp COLON>, <&kp SEMI>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
+        colon_semicolon_ht: colon_semicolon_ht {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <0>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&colon_semicolon>;
+        };
     };
 
     /*
@@ -187,7 +194,7 @@
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
          &mt LCTRL A   &kp O         &kp E         &kp U         &kp I             &kp D         &kp H         &kp T         &kp N         &mt RCTRL S
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &colon_semicolon &kp Q      &kp J         &kp K         &kp X             &kp B         &kp M         &kp W         &kp V         &kp Z
+         &colon_semicolon_ht &kp Q   &kp J         &kp K         &kp X             &kp B         &kp M         &kp W         &kp V         &kp Z
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
                                      &lt FN MINUS  &mt LSHFT SPACE &lt NAV TAB     &lt SYM RET   &mt RSHFT BSPC &mt RGUI UNDER
     //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
