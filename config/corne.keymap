@@ -115,18 +115,6 @@
             bindings = <&bt BT_SEL 3>, <&bt_3_clear>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-        r_ralt: r_ralt {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp R>, <&mt RALT R>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-        r_td: r_td {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp R>, <&mt RALT R>;
-        };
         colon_semicolon: colon_semicolon {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
@@ -235,11 +223,11 @@
             display-name = "Dvorak";
             bindings = <
     // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-         &colon_semicolon &mt LALT COMMA &mt LGUI DOT &kp P      &kp Y             &kp F         &kp G         &mt RGUI C    &r_td         &kp L
+         &colon_semicolon &mt LALT COMMA &mt LGUI DOT &kp P      &kp Y             &kp F         &kp G         &mt RGUI C    &kp R         &kp L
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
          &mt LCTRL A   &kp O         &kp E         &kp U         &kp I             &kp D         &kp H         &kp T         &kp N         &mt RCTRL S
     // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-         &mt DQT SQT   &kp Q         &kp J         &kp K         &kp X             &kp B         &kp M         &kp W         &kp V         &kp Z
+         &kp SQT       &kp Q         &kp J         &kp K         &kp X             &kp B         &kp M         &kp W         &kp V         &kp Z
     // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
                                      &lt FN MINUS  &mt LSHFT SPACE &lt NAV TAB     &lt SYM RET   &mt RSHFT BSPC &mt RGUI UNDER
     //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
